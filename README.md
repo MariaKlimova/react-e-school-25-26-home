@@ -1,29 +1,73 @@
-# react-e-school-25-26-home
+# React + TypeScript + Vite
 
-## HW1
-0) Если плаваете в гите, потренируйтесь на https://learngitbranching.js.org
-1) Создайте ваш гит-репозиторий
-2) Создать ветку для первого дз (например hw1)
-3) Заинициалируйте проект с помощью Vite (React+Typescript)
-4) Удалите всё лишнее
-5) Добавьте себе в папку mocks моковые данные из materials/mockRestaurants.ts
-6) Реализовать макет (materials/hw1.png), разбив на компоненты, данные берите из моков
-7) Сделать коммит
-8) Запушить в ваш репозиторий
-9) Сделать ПР ветки с дз1 в main
-10) Скинуть ссылку на PR
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## HW2
-1) Реализовать выбор активного состояния:
-- Дефолтно ресторан не выбран, отображаем только табы(кнопки с названиями всех ресторанов)
-- По клику на кнопку с названием отображаем ресторан(название, меню, отзывы и тд)
-- По клику на кнопку с названием другого отображаем другой ресторан.
-- Одновременно отображаем только 1 активный ресторан.(список ресторанов больше не рисуем)
-2) У блюд в меню ресторана необходимо реализовать счетчик
-- У каждого блюда должны быть две кнопки - и +.
-- Между кнопками - и + рисуем число. Дефолтно 0.
-- По клику на + увеличиваем на единицу, по клику на - уменьшаем
-- Минимальное значение 0, максимальное 5
-3) При отрисовке списков правильно заиспользовать key
-4) Застилить экран, чтобы выглядел симпатично на ваш вкус
-*) Если дз1 ещё не принято (на проверке), а вы хотите делать дз2, ветку под него выделяете не из main, а из ветки дз1
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```

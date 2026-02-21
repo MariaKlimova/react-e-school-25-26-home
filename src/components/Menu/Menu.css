@@ -1,0 +1,17 @@
+.menu {
+  margin-bottom: 24px;
+}
+
+.menu-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+}
