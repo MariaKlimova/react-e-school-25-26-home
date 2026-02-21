@@ -1,23 +1,18 @@
-import type { Restaurant } from '../../types';
+import { NavLink } from 'react-router';
+import { restaurants } from '../../mocks/mockRestaurants';
 import './RestaurantTabs.css';
 
-interface RestaurantTabsProps {
-  restaurants: Restaurant[];
-  activeId: string | null;
-  onSelect: (id: string) => void;
-}
-
-export function RestaurantTabs({ restaurants, activeId, onSelect }: RestaurantTabsProps) {
+export function RestaurantTabs() {
   return (
     <div className="restaurant-tabs">
       {restaurants.map((restaurant) => (
-        <button
+        <NavLink
           key={restaurant.id}
-          className={`tab-button ${activeId === restaurant.id ? 'active' : ''}`}
-          onClick={() => onSelect(restaurant.id)}
+          to={`/restaurants/${restaurant.id}`}
+          className={({ isActive }) => `tab-button ${isActive ? 'active' : ''}`}
         >
           {restaurant.name}
-        </button>
+        </NavLink>
       ))}
     </div>
   );

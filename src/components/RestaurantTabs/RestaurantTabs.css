@@ -30,3 +30,9 @@
   border-color: #6366f1;
   color: white;
 }
+
+.tab-button {
+  text-decoration: none;
+
+  color: #6366f1;
+}

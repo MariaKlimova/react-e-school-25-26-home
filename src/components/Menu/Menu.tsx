@@ -1,16 +1,33 @@
-import type { Dish } from '../../types';
+import { useState } from 'react';
 import { DishItem } from '../DishItem';
 import './Menu.css';
+import { Link, useOutletContext } from 'react-router';
+import type { Restaurant } from '../../types';
 
-interface MenuProps {
-  dishes: Dish[];
-  counts: Record<string, number>;
-  onIncrement: (dishId: string) => void;
-  onDecrement: (dishId: string) => void;
-}
+export function Menu() {
+  const [dishCounts, setDishCounts] = useState<Record<string, number>>({});
+  const { activeRestaurant } = useOutletContext<{ activeRestaurant: Restaurant }>();    
 
-export function Menu({ dishes, counts, onIncrement, onDecrement }: MenuProps) {
+  const dishes = activeRestaurant.menu;
+  
+  const handleIncrement = (dishId: string) => {
+    setDishCounts((prev) => {
+      const currentCount = prev[dishId] || 0;
+      if (currentCount >= 5) return prev;
+      return { ...prev, [dishId]: currentCount + 1 };
+    });
+  };
+
+  const handleDecrement = (dishId: string) => {
+    setDishCounts((prev) => {
+      const currentCount = prev[dishId] || 0;
+      if (currentCount <= 0) return prev;
+      return { ...prev, [dishId]: currentCount - 1 };
+    });
+  };
+
   return (
+    <>
     <div className="menu">
       <h3 className="menu-title">Menu</h3>
       <div className="menu-list">
@@ -18,12 +35,16 @@ export function Menu({ dishes, counts, onIncrement, onDecrement }: MenuProps) {
           <DishItem
             key={dish.id}
             dish={dish}
-            count={counts[dish.id] || 0}
-            onIncrement={() => onIncrement(dish.id)}
-            onDecrement={() => onDecrement(dish.id)}
+            count={dishCounts[dish.id] || 0}
+            onIncrement={() => handleIncrement(dish.id)}
+            onDecrement={() => handleDecrement(dish.id)}
           />
         ))}
       </div>
     </div>
+    <Link to="reviews" className="review-link">
+        View reviews
+    </Link>
+    </>
   );
 }

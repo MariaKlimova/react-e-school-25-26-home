@@ -1,0 +1,1 @@
+export { RestaurantsLayout } from './RestaurantsLayout.tsx';
