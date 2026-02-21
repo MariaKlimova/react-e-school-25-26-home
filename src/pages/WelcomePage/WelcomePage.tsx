@@ -1,19 +1,20 @@
+import { Link } from 'react-router';
 import './WelcomePage.css';
 
 export function WelcomePage() {
   return (
     <div className="welcome-page">
       <div className="welcome-content">
-        <h1 className="welcome-title">Добро пожаловать!</h1>
+        <h1 className="welcome-title">Welcome!</h1>
         <p className="welcome-subtitle">
-          Откройте для себя лучшие рестораны города
+          Discover the best restaurants in your city
         </p>
         <p className="welcome-description">
-          Просматривайте меню, читайте отзывы и выбирайте блюда из любимых ресторанов
+          Browse menus, read reviews and choose dishes from your favorite restaurants
         </p>
-        <button className="welcome-button">
-          Смотреть рестораны
-        </button>
+        <Link to="/restaurants" className="welcome-button">
+          View restaurants
+        </Link>
       </div>
     </div>
   );
